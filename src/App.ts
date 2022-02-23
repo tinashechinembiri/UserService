@@ -5,6 +5,7 @@ import {MongodbHadler} from './Db/Databases/DatabaseFactoryHandler/MongodbHandle
 //import Routes from'./Routes/Routes'; 
 import Controller from './Controller/Controller'
 import ErrorMiddleware from'./Middleware/ErrorMiddleware'; 
+import cors from'cors'; 
 /*
 const app = Express(); 
 
@@ -46,10 +47,12 @@ class App {
     {
        this.app.use(Express.json()); 
        this.app.use(Express.urlencoded({extended:true})); 
+       this.app.use(cors()); 
     }
 
     private createControllers(controllers : Controller [] )
     {
+        
         controllers.forEach ((controller) => {
             this.app.use('/api/auth', controller.router); 
         }); 

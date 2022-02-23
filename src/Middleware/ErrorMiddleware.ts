@@ -5,7 +5,7 @@ export default  async (err:ErrorHandling, req: Request, res:Response, next:NextF
 
     const status  = err.status || 500; 
     const message = err.message || 'something went wrong'; 
-  //  console.log(err)
+    console.log(err)
 
     res.status(status).send({
         code:status, 

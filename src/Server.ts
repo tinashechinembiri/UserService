@@ -2,9 +2,11 @@
 import App from './App';
 import config from "config"; 
 import CustomerController from './Controller/CustomerController'
+import UserProfileController from './Controller/UserProfileController'
 
 const  app = new App ( [ 
-    new CustomerController ()
+    new CustomerController (), 
+    new UserProfileController()
 ])
 
 

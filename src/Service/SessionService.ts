@@ -17,15 +17,14 @@ class SessionService {
     }
     public async createSession (userLogin : LoginUserIput) :Promise<TokenResponseHandler>
     {
-        
+        console.log(userLogin); 
         const user =  await this.verfiyUser(userLogin); 
         if(!user)
         {
             
             throw new ErrorHandling (401,'email or Password is wrong'); 
         }
-        console.log(user); 
-        const token =  signJwt({...omit(user, "password","Account", "_v")},"accessTokenPrivateKey", {expiresIn:'5m'} ); 
+        const token =  signJwt({...omit(user, "password","Account", "_v")},"accessTokenPrivateKey", {expiresIn:'5m'}); 
        // const refreshToken = signJwt({...user },"refreshTokenPrivateKey", {expiresIn:'1d'} ); 
 
         const _refreshtokenObject = new RefreshToken ({});
@@ -35,16 +34,19 @@ class SessionService {
 
     }
     private async verfiyUser ( {email , password} : { email:string, password:string}) {
+    
         const UserD =  await User.findOne({'email': email}); 
-        
+
         if (!UserD )
         {
             return false;
         }
-        
+    
         const password_valid = await UserD.CheckPasswordvalid (password); 
+        
         if (!password_valid)
         {
+    
             return false; 
         }
 
